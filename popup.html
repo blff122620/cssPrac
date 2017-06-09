@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>popup</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .popup-window {
+        position: fixed;
+        width: 302px;
+        z-index: 5;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        /*水平垂直居中*/
+        /*http://stackoverflow.com/questions/2005954/center-a-positionfixed-element*/
+    }
+    
+    .popup {
+        position: relative;
+        box-sizing: border-box;
+        border-radius: 5px 5px;
+        border: 1px solid #ccc;
+    }
+    
+    .top {
+        height: 40px;
+        background-color: #eee;
+    }
+    
+    .title {
+        padding: 0 20px;
+        font: 14px/40px "Microsoft YaHei";
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    
+    .content {
+        padding: 20px;
+        font: 12px serif;
+        line-height: 1.5em;
+        background-color: #fff;
+    }
+    
+    .content-top {
+        margin-bottom: 20px;
+    }
+    
+    .button {
+        width: 80px;
+        height: 30px;
+        background-color: #33AAE1;
+        color: #fff;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        border-radius: 5px 5px;
+        outline: 0;
+        border: 0;
+    }
+    
+    .exit {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+    
+    body {
+        background: url("./static/img/gz.jpg") 0 0/cover fixed space;
+    }
+    
+    .mask {
+        position: fixed;
+        /*background: url("./static/img/gz.jpg") ;*/
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="popup-window">
+        <div class="popup">
+            <div class="top">
+                <p class="title">标题栏</p>
+            </div>
+            <div class="content">
+                <div class="content-top">
+                    <p>内容段落</p>
+                </div>
+                <input class="button" type="button" value="确定">
+            </div>
+            <div class="exit">
+                <p>X</p>
+            </div>
+        </div>
+    </div>
+    <div class="mask"></div>
+</body>
+
+</html>

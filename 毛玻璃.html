@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>毛玻璃</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+    body {
+        background: url('./static/img/tiger.jpg') top center no-repeat;
+        /*position: relative;*/
+        width: 100%;
+        height: 100%;
+        hyphens: auto;
+    }
+    
+    main {
+        
+        position: absolute;
+        top: 80px;
+        left: 50%;     
+        transform: translate(-50%, 0%);
+        
+    }
+    main>div{
+        position: relative;
+        background: hsla(0, 0%, 100%, .3);
+        /*background: rgba(255,0,0,.3);*/
+        min-width: 1000px;
+        min-height: 500px;
+        border-radius: 1em;
+        padding: 2.5em;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    main>div::before{
+        content: '';
+        position: absolute;
+        top: 0;right: 0;left: 0;bottom: 0;
+        z-index: -1;
+        border-radius:inherit;
+        background: url('./static/img/tiger.jpg') top -80px center no-repeat;
+        filter: blur(10px);
+        margin: -20px;
+    }
+    
+    blockquote p {
+        text-indent: 2em;
+        font: 2.5em/1.14 monospace;
+    }
+    
+    footer {
+        font: 2.5em/1.14 monospace;
+        text-align: right;
+    }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div>
+            <blockquote>
+                <p>虎（学名：Panthera tigris ；英文名：Tiger）： 大型猫科动物；毛色浅黄或棕黄色，满有黑色横纹；头圆、耳短，耳背面黑色，中央有一白斑甚显著；四肢健壮有力；尾粗长，具黑色环纹，尾端黑色。</p>
+                <p>虎常单独活动，只有在繁殖季节雌雄才在一起生活。无固定巢穴，多在山林间游荡寻食。能游泳，不会爬树。由于林区开发、人口激增，过去偏远地区都已发展为村镇，虎亦常到林区居民点附近觅食。虎多黄昏活动，白天多潜伏休息，没有惊动则很少出来。虎的活动范围较大，在北方日寻食活动范围可达数十公里；在南方西双版纳因食物较多则活动距离较短。</p>
+                <footer>
+                    ---百度百科
+                </footer>
+            </blockquote>
+        </div>
+    </main>
+    <script type="text/javascript" src="./static/js/util.js"></script>
+    <script>
+    </script>
+</body>
+
+</html>

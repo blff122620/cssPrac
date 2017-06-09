@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>dom_test</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+        .e{width: 200px;height: 200px; margin: 30px; float: left; background: #ccc;}
+        .out{
+            white-space: nowrap;overflow: hidden;height: 300px;width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="example">
+        <p id="p1" class="aaa bbb" />
+        <p id="p2" class="aaa ccc" />
+        <p id="p3" class="bbb ccc" />
+    </div>
+    <div class="out">
+    <div class="e"></div>
+    <div class="e"></div>
+    </div>
+    <script>
+    var example = document.querySelector("#example");
+    var a = getElementsByClassName(example, "aaa"),
+    // 运行结果为包含id为p1, id为p2的元素列表
+     b= getElementsByClassName(example, "bbb ccc"),
+    // 运行结果为包含id为p3的元素列表
+    c=getElementsByClassName(example, "ccc Bbb");
+    // 运行结果为包含id为p3的元素列表
+
+    function getElementsByClassName(element, names) {
+        // if(!!document.getElementsByClassName){
+        //     return element.getElementsByClassName(names);
+        // }
+
+        var childeNodes = element.childNodes;
+        var result = [];
+        for(var i=0; i<childeNodes.length; i++){
+            if(childeNodes[i].nodeType != 1){
+                continue;
+            }
+            if(hasClass(childeNodes[i],names)){
+                result.push(childeNodes[i]);
+            }
+        }
+        return result;
+
+    }
+    function hasClass(element,names){
+        var classes = element.className.split(/\s+/);
+        var nameArray = names.split(/\s+/);
+        var count = 0;
+        for(var i=0; i<nameArray.length; i++){
+            for(var j=0; j<classes.length; j++){
+                if(nameArray[i] == classes[j]){
+                    count++;
+                    break;
+                }
+            }
+        }
+        if(count == nameArray.length){
+            return true;
+        }
+        return false;
+    }
+
+    // window.addEventListener("beforeunload",function(event){
+    //     event.returnValue = "Write something clever here..";
+    // });
+    </script>
+</body>
+
+</html>

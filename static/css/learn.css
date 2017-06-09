@@ -1,0 +1,30 @@
+.font{
+    font-size: 15px | 2em;
+    font-family: serif,sans-serif;
+    font-weight: normal|bold;
+    font-style: normal|italic|oblique;
+    line-height: normal/*(1.1-1.2)*/|14px|300%(先计算，后继承)|3（直接继承）;
+    font:normal 15px/2 serif;
+}
+.color{
+    color: red|rgb(255,0,0,0.5)|transparent;
+}
+
+.位置{
+    text-align: left|right|center|justify;
+    vertical-align: baseline|top|bottom|super|sub|middle|text-bottom|text-top|<percentage>;
+    /*只是能修改行内内容的*/
+    text-indent: 2em|-999px;
+    white-space:normal|pre|pre-wrap|nowrap|pre-line;
+    word-wrap:break-word;
+    word-break: normal|keep-all|break-all;
+}
+.shadow{
+    /*text-shadow: [<length>{2,3} && <color>? ]#;*/
+    text-decoration: underline|overline|line-through;
+}
+
+.background{
+    background-image: ;
+    background-attachment: local|scroll;
+}

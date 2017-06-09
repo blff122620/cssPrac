@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>layout</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .first {
+        height: 150px;
+        background: pink;
+        border: 1px solid #fd0000;
+        /*padding: 0;*/
+    }
+    
+    .first p {
+        background: #00fd00;
+        line-height: 400%;
+        text-align: center;
+        margin: 0;
+    }
+    
+    .first span {
+        display: inline-block;
+        /*width: 355px;*/
+        background: #ccc;
+        /*margin: 0 auto;*/
+    }
+    
+    .center {
+        height: 30px;
+        width: 30px;
+        background: blue;
+        margin: 0 auto;
+    }
+    
+    ul {
+        text-align: center;
+        text-overflow: hidden;
+        overflow: nowrap;
+        white-space: nowrap;
+        height: 30px;
+        line-height: 30px;
+        background: blue;
+    }
+    
+    ul>li,
+    ul>a {
+        
+        display: inline-block;
+        width: 100px;
+        background: #fd0000;
+        height: 100%;
+        /*margin: 0 10px;*/
+    }
+   
+    .is{
+        position: relative;
+        width: 600px;
+        height: 450px;
+    }
+    .is .title{
+        position: absolute;
+        bottom: 0;
+        /*left: 10px;*/
+        width: 100%;
+        /*height: 40px;*/
+        /*color: #ccc;*/
+        line-height: 40px;
+        /*text-indent: 2em;*/
+        background-color: black;
+        opacity: 0.7;
+    }
+    .is .title a{
+        margin-left :20px;
+        text-decoration: none;
+        color: #fff;
+    }
+    .is .controls{
+        position: absolute;
+        line-height: 10px;
+        bottom: 15px;
+        right: 10px;
+
+    }
+    .is img{
+        display: block;
+        width: inherit;
+        height: inherit;
+    }
+    .is .controls span{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: auto 1px;
+        background-color:gray;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .is .controls .cur{
+        background-color: #fff;
+    }
+    .is .controls span:hover{
+        background: #fff;
+    }
+    
+    .is .controls{
+        cursor: default;
+    }
+
+    .forline{
+        width: 200px;
+        margin: 30px 20px;
+        border: 1px dotted gray;
+        line-height: 2;
+    }
+    .mask{
+        position: fixed;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        background-color: gray;
+        opacity: 0.7;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div class="first">
+        <p><span>test</span></p>
+        <div class="center"></div>
+    </div>
+    <div>
+        <ul>
+            <li><a href="#">test</a></li>
+            <li><a href="#">test</a></li>
+            <li><a href="#">test</a></li>
+            <li><a href="#">test</a></li>
+            <li><a href="#">test</a></li>
+        </ul>
+    </div>
+
+    <div class="is">
+        <img src="./static/img/timg.jpeg" alt="">
+        <p class="title"><a href="#">这就是广州</a></p>
+        <div class="controls">
+            <span></span>
+            <span class="cur"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="forline">
+        <div>123</div>
+        <div>254</div>
+    </div>
+    <div class="mask"></div>
+</body>
+
+</html>

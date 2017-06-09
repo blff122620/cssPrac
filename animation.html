@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animation</title>
+    <style>
+        .demo{
+            position: relative;
+            width: 400px;
+            height: 200px;
+            background-color: #9cc;
+            outline: 2px dotted #ccc;
+        }
+        .ball{
+            position: absolute;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: #fc9;
+            /*outline: 2px dotted #000;*/
+            box-shadow: 0 0 0 -5px #fcc;
+            left: 0;
+            top:0;
+            font: 14px/20px "Microsoft YaHei";
+            color: #fff;
+            text-align: center;
+            -webkit-animation:abc 4s steps(1,start);
+            animation-iteration-count: 1;
+            /*animation-direction: alternate-reverse;*/
+        }
+        @-webkit-keyframes abc{
+            /*0%{left: 20px;top:0;}*/
+            50%{left: 200px;top:150px;}
+            /*100%{left: 350px;top:0;}*/
+        }
+    </style>
+</head>
+<body>
+    <div class="demo">
+        <div class="ball">
+            <p>abc沙发沙发爽肤水</p>
+        </div>
+    </div>
+</body>
+</html>

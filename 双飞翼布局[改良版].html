@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>双飞翼布局</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+    body {
+        min-width: 600px;
+    }
+    
+    header,
+    footer {
+        width: 100%;
+        height: 50px;
+    }
+    
+    #bd {
+        
+        overflow: hidden;
+    }
+    .main-content{
+        padding: 0 100px 0 100px;
+    }
+    .main,
+    .left,
+    .aside {
+        padding-bottom: 10000px;
+        margin-bottom: -10000px;
+    }
+    
+    .main {
+        float: left;
+        width: 100%;
+    }
+    
+    .left {
+        float: left;
+        width: 100px;
+        margin-left: -100%;
+
+    }
+    
+    .aside {
+        float: left;
+        width: 100px;
+        margin-left: -100px;
+
+    }
+    </style>
+</head>
+
+<body>
+    <header class="bg1">header</header>
+    <div id="bd" class="bd clearfix">
+        <div class="main">
+            <div id="main-content" class="main-content bg2">main
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高
+                <br>我很高</div>
+        </div>
+        <div id="left" class="left bg3">left</div>
+        <div id="aside" class="aside bg4">aside</div>
+    </div>
+    <footer class="bg5 ">footer</footer>
+    <script>
+    </script>
+</body>
+
+</html>

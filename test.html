@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style>
+    * {
+        /*
+        margin: 0;
+        padding: 0;*/
+    }
+    /*div{
+        background: pink;
+    }
+*/    
+    body {
+        width: 600px;
+    }
+    
+    #gz {
+        width: 500px;
+    }
+    
+    [class~=sports] {
+        color: red;
+    }
+    
+    .sports:link {
+        color: green;
+    }
+    
+    .sports:visited {
+        color: #ccc;
+    }
+    
+    .sports:hover {
+        color: blue;
+    }
+    
+    .sports:active {
+        color: pink;
+    }
+    
+    li:last-of-type {
+        color: red;
+    }
+    
+    /*span:only-of-type {
+        color: blue;
+    }*/
+    
+    /*p::first-letter {
+        font-size: 25px;
+    }
+    
+    p::first-line {
+        color: red;
+    }*/
+    /*p::before{
+        content: "before";
+    }*/
+    
+    ::selection {
+        color: red;
+        background: #ccc;
+    }
+    .button{
+        cursor: pointer;
+        background: green;
+        color: white;
+        font-size:55px;
+        border-radius:50%;
+    }
+    
+/*    p:nth-child(1) {
+        text-align: right;
+    }*/
+    
+    p:nth-child(3) {
+        text-align: center;
+        font-size: 25px;
+        background: #ccc;
+    }
+    
+    p>img {
+        width: 13px;
+        /*vertical-align: 40px;*/
+    }
+    
+    /*p:first-child {
+        text-indent: 2em;
+        word-break: break-all;
+        text-shadow: 1px 2px 4px ;
+        text-decoration:overline underline;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }*/
+    .margin-class{
+        border: dashed green;
+        border-width: 10px 5px 3px 1px;
+        background: #ccc;
+        /*margin-bottom: 40px;*/
+    }
+    .margin-class div:first-child{
+        width: 300px;
+        height: 40px;
+        background: blue;
+    }
+    .margin-class div:last-child{
+        width: 300px;
+        height: 40px;
+        background: pink;
+        /*margin: 30px;*/
+        margin:0 auto;
+        /*margin-bottom: 20px;*/
+        /*box-shadow:inset 2px 0px 5px 0px;*/
+        outline:2px dashed blue;
+        background-image: linear-gradient(red 20%,blue );
+    }
+    .margin-class+div{
+        height: 30px;
+        background: green;
+        margin-top:30px;
+        background-image: url("./static/img/s_logo.jpeg");
+        border: 10px dotted red;
+        padding: 20px;
+
+        background-origin: content-box;
+        background-clip: content-box;
+    }
+    .mybox{
+        margin: 20px;
+        padding: 10px;
+        border: 10px solid #03D766;
+        width: 200px;
+        height: 200px;
+        box-sizing: content-box;
+        background-image: url("./static/img/eng.png") ;
+        background-repeat: no-repeat;
+        /*background-size: contain;*/
+        background-color: #33AAE1;
+        background-origin: content-box;
+        border-radius: 25px;
+        color: white;
+/*        outline: 5px dashed #bc939c;
+        outline-offset: -5px;*/
+        box-shadow: inset 0 0 0 5px #fb0000,
+        inset 0 0 0 10px #FBDD00, 
+        inset 0 0 0 15px #00BDFB;
+    }
+    /*.mybox>div{
+        margin: 0 auto;
+        height: 100%;
+        background: red;
+    }*/
+    .out{
+        width: 200px;
+        height: 200px;
+        background: #ccc;
+        border: 1px solid blue;
+        text-align: center;
+    }
+    .out>div{
+        width: 30px;
+        height: 50%;
+        background: red;
+        margin: auto auto;
+    }
+    </style>
+</head>
+
+<body>
+    <video id="gz" loop controls poster="./static/img/gz.jpg">
+        <source src="./static/video/gz.mp4" type="video/mp4"> 对不起，当前浏览器不支持播放视频
+    </video>
+    <form>
+        <fieldset>
+            <legend>firstPara</legend>
+            <div>
+                <label for="photo">照片</label>
+                <select name="photo" id="photo">
+                    <optgroup label="group1">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </optgroup>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div>
+                <label for="">
+                    <input type="checkbox" checked>照片1
+                </label>
+                <label for="">
+                    <input type="checkbox">照片2
+                </label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>secondPara</legend>
+        </fieldset>
+        <fieldset>
+            <legend>thirdPara</legend>
+        </fieldset>
+    </form>
+    <h2 class="sports">标题1</h2>
+    <p class="like sports">标题2</p>
+    <a class="sports" href="#"><em>bbbbb</em>aaaaaaaaaaa<span>ccccc</span>aaaaa</a>
+    <a class="sports" href="#"><em>bbbbb</em>aaaaaaaaaaa<span>ccccc</span><span>ddddd</span>aaaaa</a>
+    <div>
+        <ul>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+        </ul>
+        <p>
+            在css中，模式匹配规则决定了哪些样式规则将被应用到文档树中的元素上。而这些模式，我们称它为选择符，这些选择符可以是简单的元素名字也可以是复杂的上下文模式。如果模式中的所有条件对某一个元素都是符合的，那么这个选择符匹配上了这个元素。
+        </p>
+    </div>
+    <div>
+        <p>第一行很长很长第一行很长很长第一行很</p>
+        <p>第一行很长很长第一行很长很长第一行很</p>
+        <p>第一行很长很长第<img src="./static/img/s_logo.jpeg" alt="">一行很长很长第一行很</p>
+        <p>第一行很长很长第一行很长很长第一行很</p>
+    </div>
+    <div>
+        <pre><code>.sports:link {
+                color: green;
+}</code></pre>
+    </div>
+    <div>
+        <p>
+            HeadlineNews UpdatesResearch NewsMultimedia NewsResearch in China Research Facts and FiguresKey LaboratoriesBig Science FacilityScientific Database
+        </p>
+    </div>
+    <div>
+        <span class="button">按钮</span>
+    </div>
+
+    <div class="margin-class">
+        <div></div>
+        <div></div>
+    </div>
+    <div></div>
+
+    <div class="mybox"><div><p>内容区</p></div></div>
+    <div class="out"><div></div></div>
+
+    <div></div>
+    <form id="emptyForm"><label id="label" for="d"><input type="text" id="d"></label></form>
+    <form action="" id="f2"></form>
+
+    
+</body>
+
+</html>

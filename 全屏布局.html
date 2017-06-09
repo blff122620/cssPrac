@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全屏布局</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        .top,.foot{
+            /*height: 100px;*/
+        }
+        .foot{
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+        .side{
+            /*width: 200px;*/
+            height: inherit;
+            float: left;
+        }
+        .content{
+            height: 100%;
+            overflow: scroll;
+        }
+        .test{
+            width: 3000px;
+            height: 3000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top bg1">dsafasd</div>
+    <div class="side bg2">dsafdssssssssssssssasddasasf</div>
+    <div class="content bg3"><p>好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容好多内容</p>
+    <div class="test">asdfads</div></div>
+    <div class="foot bg4">dafads</div>
+    <script>
+
+    </script>  
+</body>
+</html>

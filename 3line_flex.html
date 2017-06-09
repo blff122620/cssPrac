@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>threeline_flex</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        html,body{
+            height: 100%;
+        }
+        body{
+            display: flex;
+            flex-flow: column;
+        }
+        header,footer{
+            height: 100px;
+            background: black;
+            line-height: 100px;
+            text-align: center;
+        }
+        .body{
+            flex:1;
+            display: flex;
+            flex-flow: row-reverse nowrap;
+            /*width: 100%;*/
+            /*align-self:center;*/
+            /*flex-basis: 300px;*/
+            /*width: 400px;*/
+
+        }
+        article{
+            /*padding: 10px;*/
+            flex: 1;
+            background: #ccc;
+            background-origin: content-box;
+            /*margin-left: 10px;*/
+        }
+        .inside{
+            /*margin: 100px;*/
+        }
+        aside{
+            /*flex: 1;*/
+            width: 200px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <header>header</header>
+    <div class="body">
+        <article>
+        <div class="inside">sadfa</div></article>
+        <aside>aside</aside>
+    </div>
+    <footer>footer</footer>
+</body>
+</html>

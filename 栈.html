@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>栈，队列</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+    function Stack() {
+        var items = [];
+
+        this.push = function(element) {
+            items.push(element);
+        };
+        this.pop = function() {
+            return items.pop();
+        };
+        this.isEmpty = function() {
+            return !items.length;
+        };
+        this.size = function() {
+            return items.length;
+        };
+        this.peek = function() {
+            return items[items.length - 1];
+        };
+        this.print = function() {
+            return items.toString();
+        };
+        this.clear = function() {
+            items = [];
+        };
+    }
+    function Queue() {
+        var items = [];
+        this.enqueue = function(element){
+            items.push(element);
+        };
+        this.dequeue = function(){
+            return items.shift();
+        };
+        this.size = function(){
+            return items.length;
+        };
+        this.isEmpty = function(){
+            return !items.length;
+        };
+        this.front = function(){
+            return items[0];
+        };
+        this.clear = function(){
+            items = [];
+        };
+        this.print = function(){
+            return items.toString();
+        };
+    }
+    var baseConverter = (function() {
+
+        /**
+         * 
+         * @param  {[type]} decNum [十进制数]
+         * @param  {[type]} base   [转换为几进制]
+         * @return {[type]}        [返回几进制的数]
+         */
+        return function(decNum, base) {
+            var result = new Stack(),
+                abundant, //余数
+                baseString = ""; //输出结果
+
+            var digits = "0123456789ABCDEF";
+            while (decNum > 0) {
+
+                abundant = Math.floor(decNum % base);
+                decNum = Math.floor(decNum / base);
+                result.push(abundant);
+            }
+
+            while (!result.isEmpty()) {
+                baseString += digits[result.pop()];
+            }
+            return baseString;
+        }
+
+    })();
+    var hotPotato = function(items,num){
+        var queue = new Queue();
+        for(var i=0; i< items.length; i++){
+            queue.enqueue(items[i]);
+        }
+        var eliminated = "";
+        while(queue.size()>1){
+            for(var i=0; i<num; i++){
+                queue.enqueue(queue.dequeue());
+            }
+            eliminated = queue.dequeue();
+            console.log(eliminated+"被删除了");
+        }
+        console.log(queue.dequeue()+"获胜了");
+    };
+
+    console.log(baseConverter(4, 2));
+    console.log(baseConverter(31, 16));
+    var queueItems = ["a","b","c","d","e"];
+    hotPotato(queueItems,7);
+    </script>
+</body>
+
+</html>

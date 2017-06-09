@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title_here</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+    .main {
+        float: left;
+        width: 100%;
+    }
+    
+    #bd {
+        padding: 0 190px 0 190px;
+        min-width: 600px;
+    }
+    
+    .sub {
+        float: left;
+        width: 190px;
+        margin-left: -100%;
+        background: lightblue;
+        position: relative;
+        left: -190px;
+    }
+    
+    .extra {
+        float: left;
+        width: 190px;
+        margin-left: -190px;
+        position: relative;
+        right: -190px;
+    }
+    
+    .container {
+        width: 430px;
+        height: 410px;
+        overflow: hidden;
+    }
+    /*ul{
+        
+        height: inherit;
+        margin-right: -10px;
+    }
+    li{
+        height: 200px;
+        margin-bottom: 10px;
+        float: left;
+
+        width: 100px;
+        margin-right: 10px;
+        margin-bottom: -2px;
+    }*/
+    
+    #test {
+        margin: 20px;
+        width: 390px;
+        /*height: 180px;*/
+        background: #F4F8FC;
+        border-radius: 3px;
+        border: 2px solid #D7E2EC;
+        /*overflow: hidden;*/
+    }
+    
+    .test-li {
+        height: 25px;
+        line-height: 25px;
+        padding: 5px;
+        border-bottom: 1px dotted #D5D5D5;
+    }
+    
+    .test-li:last-child {
+        margin-bottom:-1px;
+    }
+    .col2{
+        margin-left:100px;
+
+    }
+    .top{
+        margin-top:-2em;
+    } 
+    .col3{
+        margin-left:200px;
+    }
+    .temp1{
+        /*height: 300px;*/
+        background: #ddd;
+        /*width: 300px;*/
+        margin:200px;
+        outline: 2px dotted red;
+        overflow: hidden;
+    }
+    .temp2{
+        outline: 5px dotted lightgreen;
+        float: left;
+        /*height: 300px;*/
+        width: 100px;
+        background: blue;
+        position: relative;
+        /*margin-left: -100px;*/
+    }
+    .temp2,.temp3>div{
+        padding-bottom: 300px;
+        margin-bottom: -300px;
+    }
+    .temp3{
+        outline: 6px dotted gold;
+        float: left;
+        /*height: 300px;*/
+        width: 100%;
+        background: pink;
+
+        margin-left: -100px;
+    }
+    .temp3>div{
+        margin-left: 100px;
+        background: gray;
+    }
+    .textarea{
+        margin:3px;
+        width: 300px;
+        border:1px solid gray;
+        outline:0;
+    }
+    .ifc>div{
+        display: inline-block;
+        vertical-align: top;
+    }
+    .ifc>div:first-child{
+        line-height: 300px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="page ">
+        <div id="hd"></div>
+        <div id="bd" class="clearfix">
+            <div class="main bg1">main</div>
+            <div class="sub bg2">left</div>
+            <div class="extra bg3">right</div>
+        </div>
+        <div id="ft"></div>
+    </div>
+    <div class="container bd1">
+        <ul class="bg3">
+            <li class="bg2"></li>
+            <li class="bg2">2</li>
+            <li class="bg2"></li>
+            <li class="bg2"></li>
+            <li class="bg2">5</li>
+            <li class="bg2"></li>
+            <li class="bg2"></li>
+            <li class="bg2"></li>
+        </ul>
+    </div>
+    <ul id="test">
+        <li class="test-li">Test</li>
+        <li class="test-li">Test</li>
+        <li class="test-li">Test</li>
+        <li class="test-li bg2">Test</li>
+        <li class="test-li">Test</li>
+    </ul>
+
+    <ul id="test2">
+        <li class="col1">Test</li>
+        <li class="col1 ">Test</li>
+        <li class="col2 top">Test</li>
+        <li class="col2">Test</li>
+        <li class="col3 top">Test</li>
+    </ul>
+
+    <div class="temp1 clearfix">
+        <div class="temp2">123</div>
+        <div class="temp3">
+        <div>444<br>555</div></div>
+    </div>
+    <div class="textarea" id="js-textarea" contenteditable></div>
+    <textarea>adf</textarea>
+
+    <div class="ifc">
+        <div class="bg1">111111111111</div>
+        <div class="bg2">22222222222222</div>
+    </div>
+    <script>
+    var tem = (function(){
+        var _dir = "forward";
+        var changeDir = function(dir){
+            _dir = dir;
+        };
+        return {
+            setDir : function(d){
+                changeDir(d);
+                console.log(_dir);
+            }
+        }
+
+    })();
+    tem.setDir("backword");
+    console.log(tem._dir);
+
+    var memorizeFunction = function(func){
+        var cache = {};
+        return function(){
+            var key = Array.prototype.slice.call(arguments).join(",");
+            if(cache[key]){
+                ;
+            }
+            else{
+                cache[key] = func.apply(this,arguments);
+            }
+            return cache[key];
+        };
+    };
+    var index = 1;
+    // var fibonacci = ;
+    var fibonacciM = memorizeFunction(function(m){
+        console.log("调用了："+index++);
+        return (m==0 || m==1) ? m : fibonacciM(m-1) + fibonacciM(m-2);
+    });
+    console.log(fibonacciM(8));
+
+    function overloadMethod(object,name,fn){
+        if(!object._overload){
+            object._overload = {};
+        }
+        if(!object._overload[name]){
+            object._overload[name] = {};
+        }
+        if(!object._overload[name][fn.length]){
+            object._overload[name][fn.length] = fn;
+        }
+        object[name] = function(){
+            if(this._overload[name][arguments.length]){
+                return this._overload[name][arguments.length].apply(this,arguments);
+            }
+        };
+    }
+    function Students(){
+        overloadMethod(this,"find",function(){
+            console.log("我是没有参数的函数");
+        });
+        overloadMethod(this,"find",function(first){
+            console.log("我是有1个参数的函数");
+        });
+    }
+    var stu = new Students();
+    stu.find();
+    stu.find(2);
+
+    var module = {
+        id: 'hello',
+        exports: {}
+    };
+    var load = function (exports, module) {
+        // hello.js的文件内容
+        exports = 1;
+        // load函数返回:
+        return module.exports;
+    };
+
+    var exported = load(module.exports, module);
+    console.log(document.readyState);
+    window.onload = ()=>{
+        console.log(document.readyState);
+    };
+
+    var divTextarea = document.querySelector("#js-textarea");
+    // divTextarea.onclick = (e)=>{
+    //     // e.currentTarget.focus();
+    //     console.log("ssssssssssss");
+    // };
+    // divTextarea.addEventListener("keydown",function(e){
+    //     e.stopPropagation();
+    //     e.target.innerText += e.key;
+        
+    // });
+    console.log(("hi"));
+    </script>
+</body>
+
+</html>

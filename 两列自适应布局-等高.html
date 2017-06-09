@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>等高自适应1</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+        .parent{
+            display: table;
+            width: 100%;
+        }
+        .l,.content{
+            display: table-cell;
+        }
+        .l{
+            width: 200px;
+            background-color: #ccc;
+            padding-right: 20px;
+            background-clip: content-box;
+        }
+        .content{
+            background: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="l"><p>left</p></div>
+        <div class="content"><p>right</p><p>right</p></div>
+    </div>
+    <script>
+
+    </script>  
+</body>
+</html>

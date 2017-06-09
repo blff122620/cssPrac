@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>中间自适应table模式 ie678废了</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+        .table{
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            min-width: 300px;
+        }
+        .table>div{
+            display: table-cell;
+        }
+        .left,.right{
+            width: 100px;
+            background: #ccc;
+        }
+        .middle{
+            background: red;
+            background-clip: content-box;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="table">
+        <div class="left">l</div>
+        <div class="middle">m</div>
+        <div class="right">r</div>
+    </div>
+    
+    <script>
+    </script>
+</body>
+
+</html>

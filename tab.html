@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab</title>
+    <style>
+        *{
+            font: 14px "Microsoft YaHei";
+            margin: 0;
+            padding: 0;
+        }
+        .tab{
+            margin: 10px;
+            width: 572px;
+            border: 1px solid #999;
+        }
+        .tabnav li{
+            list-style: none;
+            /*display: inline-block;*/
+            float: left;
+            border-right: 1px solid #cecece;
+            border-bottom: 1px solid #cecece; 
+            text-align: center;
+            line-height: 2em;
+            background-color: #f1f1f1;
+            width: 190px;
+            cursor: pointer;
+        }
+        .tabnav .cur-tab{
+            background-color: #fff ;
+            border-bottom-color: #fff ;
+            cursor: default;
+        }
+        .tabnav .right{
+            border-right: none;
+            /*width: 34%;*/
+        }
+        .tab .content>div{
+            display: none;
+        }
+        .tab .content .cur{
+            display: block;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .clearfix:after{
+            content:".";
+            display: block;
+            clear: both;
+            overflow: hidden;
+            visibility: hidden;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <nav>
+            <ul class="tabnav clearfix">
+                <li class="cur-tab">课程</li>
+                <li>学习计划</li>
+                <li class="right">技能图谱</li>
+            </ul>
+        </nav>
+        <div class="content">
+            <div class="cur">课程内容</div>
+            <div>学习计划内容</div>
+            <div>技能图谱</div>
+
+        </div>
+    </div>
+    <script>
+        /**
+         * 获取所有的element节点，去除text节点和注释节点
+         * @param  {[Node]} element [输入为Dom节点]
+         * @return {[Array]}      [输出为所有的NodeType为Element的元素数组]
+         */
+        function getAllElement(element){
+            var i,
+                elements = [],
+                child = element.firstElementChild;
+            do{
+                elements.push(child);
+                child = child.nextElementSibling;
+            }while(child != element.lastElementChild)
+                elements.push(child);
+            return elements;
+        }
+        /**
+         * [返回node是element的第几个节点，从0开始]
+         * @param  {[type]} node    [description]
+         * @param  {[type]} element [description]
+         * @return {[type]}         [description]
+         */
+        function getNodeIndex(node,element){
+            for(var i=0;i<element.length;i++){
+                if(node=== element[i]){
+                    return i;
+                }
+            }
+        }
+        var body = document.body;
+        function handleUlClick(){
+            //事件的目标
+            var curTarget = event.target;
+            var tabnav = document.querySelector(".tabnav");
+            //获取所有ul下的li节点
+            var lis = getAllElement(tabnav);
+            //获取所有的相关div内容
+            var relaventDiv = getAllElement(document.querySelector(".content"));
+            console.log(relaventDiv);
+            var contents = document.querySelector(".content");
+
+            //判断正确的ul下是否包含点击的li节点
+            if(tabnav.contains(curTarget)){
+                //toggle cur-tab 同时切换下面的div内容
+        
+                if(!curTarget.classList.contains("cur-tab")){
+                    for(var i=0;i<lis.length;i++){
+                        lis[i].classList.remove("cur-tab");  
+                        relaventDiv[i].classList.remove("cur");
+                    }
+                    curTarget.classList.add("cur-tab");
+                    var divIndex = getNodeIndex(curTarget,lis);
+                    relaventDiv[divIndex].classList.add("cur");
+                }
+            }
+
+
+        }
+
+        body.addEventListener("click",handleUlClick,false);
+    </script>
+</body>
+</html>

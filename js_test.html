@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>js_test</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div>欢迎<a href="/profile">Jerry</a>同学!</div>
+    <button id="my-input">dsf
+    </button>
+    <form><input id="userName" name="userName" class="name"></form>
+    <script>
+    var factorial = (function() {
+        var count = 0;
+        var memory = [1];
+        var fac = function(i) {
+            count++;
+            var result = memory[i];
+            if (typeof result === "number") {
+                console.log('调用次数：' + count);
+                return result;
+            }
+            result = i * fac(i - 1);
+            memory[i] = result;
+            return result;
+        }
+        return fac;
+
+    })();
+    for (var i = 0; i <= 10; i++) {
+        console.log(factorial(i));
+    }
+
+    function bind(fn, context) {
+        var args = Array.prototype.slice.call(arguments, 2);
+        return function() {
+            var innerArgs = Array.prototype.slice.call(arguments);
+            var finalArgs = args.concat(innerArgs);
+            return fn.apply(context, finalArgs);
+        }
+    }
+    var handler = {
+            id: "mess",
+            handleClick: function(event) {
+                // debugger;
+                console.log(this.id);
+            }
+        }
+        // handler.handleClick();
+    var input = document.querySelector("#my-input");
+    input.addEventListener("click", function(event) {
+        handler.handleClick(event)
+    });
+
+    function createFunction() {
+        var result = [];
+
+        for (var i = 0; i < 10; i++) {
+            result[i] = (function(num) {
+                return function() {
+                    return num;
+                };
+            })(i)
+        }
+        return result;
+
+    }
+    var result = createFunction();
+
+    function curry(fn) {
+        var outerArgs = Array.prototype.slice.call(arguments, 1);
+        return function() {
+            var innerArgs = Array.prototype.slice.call(arguments);
+            var args = outerArgs.concat(innerArgs);
+            return fn.apply(null, args);
+        }
+    }
+
+    function add() {
+        var args = Array.prototype.slice.call(arguments);
+        var result = 0;
+        for (var i = 0; i < args.length; i++) {
+            result += args[i];
+        }
+        return result;
+    }
+    var curryAdd = curry(add, 5);
+    var ccc = curry(curryAdd, 8, 7);
+    var c = ccc(3);
+    // var value;
+    function curryAdd2(i) {
+        var value = i;
+        var helper = function(next) {
+
+            value += next;
+            return helper;
+        }
+        helper.valueOf = function() {
+            return value;
+        }
+        return helper;
+    }
+    var a = "aaa";
+    with({
+        a: "bbbb"
+    }) {
+        function foo() {
+            console.log("foo里面a为" + a);
+        }
+        (function() {
+            console.log("函数表达式里面a为" + a);
+        })();
+        foo();
+    }
+
+    function type(data) {
+        var raw = Object.prototype.toString.apply(data);
+        raw = raw.slice(8);
+        console.log(raw);
+        var out = raw.match(/(\w+)[^\]]/g)[0];
+        console.log(out);
+    }
+
+    function bind(fn, context) {
+        var args = Array.prototype.slice.call(arguments, 2);
+        return function() {
+            var innerArgs = Array.prototype.slice.call(arguments);
+            var finalArgs = args.concat(innerArgs);
+            fn.apply(context, finalArgs);
+        };
+    }
+
+    function fibonacci(n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        return arguments.callee(n - 1) + arguments.callee(n - 2);
+    }
+
+    function search(arr, dst) {
+        var low = 0,
+            high = arr.length - 1,
+            mid,
+            element;
+        while (low <= high) {
+            mid = Math.floor((low + high) / 2);
+            element = arr[mid];
+            if (element == dst) {
+                return mid;
+            }
+            if (element > dst) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return -1;
+    }
+    /**
+         * 其中pattern的全格式为"yyyy-MM-dd HH:mm:ss"
+         * @param  {[type]} date    [description]
+         * @param  {[type]} pattern [description]
+         * @return {[type]}         [description]
+         * var date = new Date(2001, 8, 11, 8, 26, 8);
+    formatDate(date, "yyyy");       返回值： "2001"
+    formatDate(date, "yyyy-MM-dd");     返回值： "2001-09-11"
+    formatDate(date, "yyyy-MM-dd HH");      返回值： "2001-09-11 08"
+    formatDate(date, "yyyy-MM-dd HH:mm:ss");    返回值： "2001-09-11 08:26:08"
+请写出函数formatDate的实现代码。
+         */
+    function formatDate(date, pattern) {
+        var year = date.getFullYear(),
+            month = date.getMonth() + 1,
+            day = date.getDay(),
+            hour = date.getHours(),
+            minute = date.getMinutes(),
+            second = date.getSeconds();
+        console.log(year+month+day);
+        switch(pattern){
+            case "yyyy":
+                return year;
+                break;
+        }
+    }
+    </script>
+</body>
+
+</html>

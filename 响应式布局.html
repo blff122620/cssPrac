@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>响应式布局</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+    .l {
+        float: left;
+    }
+    
+    .left {
+        width: 200px;
+        height: 300px;
+        background: #ccc;
+        border: 1px dotted green;
+    }
+    
+    .content {
+        background: lightgreen;
+        border: 1px dashed blue;
+        margin-left: 220px;
+    }
+    @media screen and (max-width: 320px){
+        .l{
+            float: none;
+            margin-bottom: 20px;
+        }
+        .content{
+            margin: 0
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="l left"></div>
+    <div class="content clearfix">
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+    </div>
+    <script>
+    (function(){
+        var i = 10;
+        function add(b){
+            console.log(i+b);
+            debugger;
+        }
+        add(1);
+    })();
+    </script>
+</body>
+
+</html>

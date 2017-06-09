@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>css揭秘</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+    button {
+        padding: .3em .8em;
+        border: 1px solid rgba(0, 0, 0, .1);
+        background: #58a linear-gradient(hsla(0, 0%, 100%, .2), transparent);
+        border-radius: .2em;
+        box-shadow: 0 .05em .25em rgba(0, 0, 0, .5);
+        color: white;
+        text-shadow: 0 -.05em .05em rgba(0, 0, 0, .5);
+        font-size: 125%;
+        line-height: 1.5;
+    }
+    
+    button.cancel {
+        background-color: #c00;
+    }
+    
+    button.ok {
+        background: #6b0;
+    }
+    
+    hr {
+        height: .5em;
+        background: currentColor;
+    }
+    
+    .callout {
+        background: pink;
+        position: absolute;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: .2em;
+        left: 3.2em;
+        top: 2.3em;
+        font-size: .8em;
+        padding: 8px;
+    }
+    
+    .callout::before {
+        content: "";
+        background: inherit;
+        position: absolute;
+        padding: .35em;
+        left: 1em;
+        top: -.4em;
+        transform: rotate(45deg);
+        border: inherit;
+        border-right: 0;
+        border-bottom: 0;
+    }
+    
+    .tips {
+        position: relative;
+        padding-bottom: 2em;
+    }
+    
+    .transparent-border-demo {
+        background: url('./static/img/timg.jpeg') 400px 300px/cover;
+        width: 400px;
+        height: 300px;
+        position: relative;
+    }
+    
+    .transparent-border-demo>div {
+        background: white;
+        background-clip: padding-box;
+        border: 10px solid hsla(0, 0%, 100%, .5);
+        width: 200px;
+        height: 150px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    .demo4 {
+        background: tan;
+        width: 200px;
+        height: 100px;
+        outline: .6em solid #655;
+        border-radius: .8em;
+        box-shadow: 0 0 0 .5em #655;
+    }
+    
+    .content-box {
+        width: 320px;
+        height: 240px;
+        margin: 10px;
+    }
+    
+    .demo5-1 {
+        background: linear-gradient(#fb3 50%, #58a 50%);
+    }
+    
+    .demo5-2 {
+        background: linear-gradient(#fb3 50%, #58a 50%);
+        background-size: 100% 30px;
+    }
+    
+    .demo5-3 {
+        background: linear-gradient(90deg, #fb3, #fb3 50%, #58a 50%);
+        background-size: 30px 100%;
+    }
+    
+    .demo5-4 {
+        background: linear-gradient(90deg, #fb3 50%, red 0, red 75%, #58a 75%);
+        background-size: 30px 100%;
+    }
+    
+    .demo5-5 {
+        background: repeating-linear-gradient(45deg, #fb3, #fb3 15px, #58a 0, #58a 30px);
+    }
+    
+    .demo5-6 {
+        background: #58a repeating-linear-gradient(45deg, transparent, transparent 15px, hsla(0, 0%, 100%, .1) 0, hsla(0, 0%, 100%, .1) 30px);
+    }
+    
+    .demo6-1 {
+        background: #58a;
+        background-image: repeating-linear-gradient(white, white 1px, transparent 0, transparent 15px), repeating-linear-gradient(90deg, white, white 1px, transparent 0, transparent 15px);
+    }
+    
+    .demo6-2 {
+        background: #58a;
+        background-image: linear-gradient(hsla(0, 0%, 100%, .3) 1px, transparent 0), linear-gradient(90deg, hsla(0, 0%, 100%, .3) 1px, transparent 0), linear-gradient(white 2px, transparent 0), linear-gradient(90deg, white 2px, transparent 0);
+        background-size: 15px 15px, 15px 15px, 75px 75px, 75px 75px;
+    }
+    
+    .demo6-3 {
+        background: #655;
+        background-image: radial-gradient(tan 20%, transparent 0), radial-gradient(tan 20%, transparent 0);
+        background-size: 30px 30px;
+        background-position: 15px 15px, 0px 0px;
+    }
+    
+    .demo6-4 {
+        background: #eee;
+        background-image: linear-gradient(45deg, #bbb 25%, transparent 0), linear-gradient(45deg, transparent 75%, #bbb 0), linear-gradient(45deg, #bbb 25%, transparent 0), linear-gradient(45deg, transparent 75%, #bbb 0);
+        background-size: 30px 30px, 30px 30px, 30px 30px, 30px 30px;
+        background-position: 0 0, 15px 15px, 15px 15px, 30px 30px;
+    }
+    
+    .demo6-5 {
+        background: #eee;
+        background-image: linear-gradient(45deg, rgba(0, 0, 0, .2) 25%, transparent 0, transparent 75%, rgba(0, 0, 0, .2) 0), linear-gradient(45deg, rgba(0, 0, 0, .2) 25%, transparent 0, transparent 75%, rgba(0, 0, 0, .2) 0);
+        background-size: 30px 30px;
+        background-position: 0 0, 15px 15px;
+    }
+    
+    .demo8-1 {
+        border: 1em solid transparent;
+        background: linear-gradient(white, white) padding-box, url('./static/img/timg.jpeg') border-box 0/cover;
+    }
+    
+    .demo8-2 {
+        border: 1em dashed transparent;
+        padding: 2em;
+        background: linear-gradient(white, white) padding-box, repeating-linear-gradient(-45deg, red, red 12.5%, transparent 0, transparent 25%, #58a 0, #58a 37.5%, transparent 0, transparent 50%) border-box 0/5em 5em;
+    }
+    
+    .demo8-3 {
+        border: 1px solid transparent;
+        padding: 1em;
+        background: linear-gradient(white, white) padding-box, repeating-linear-gradient(-45deg, black, black 12.5%, transparent 0, transparent 25%) border-box 0/1em 1em;
+    }
+    
+    .demo8-3:hover {
+        -moz-animation:12s infinite linear ants;
+        animation: 12s infinite linear ants;
+
+    }
+    
+    @keyframes ants {
+        100% {
+            background-position: 100%;
+        }
+    }
+    @-moz-keyframes ants {
+        100% {
+            background-position: 100%;
+        }
+    }
+    
+    .demo8-4 .footer {
+        border-top: .2em solid red;
+        border-image: 100% 0 0 linear-gradient(90deg, currentColor 4em, transparent 0);
+        padding-bottom: 1em;
+    }
+    
+    .demo8-4 {
+        color: red;
+    }
+    
+    .demo9-1 {
+        background: #58a;
+        /*border-top-left-radius: 100% 100%;*/
+        border-radius: 50%/100% 100% 0 0;
+    }
+    
+    .demo10-1 {
+        color: white;
+        padding: 10px;
+        width: 50px;
+        height: 20px;
+        position: relative;
+    }
+    
+    .demo10-1::after {
+        content: '';
+        z-index: -1;
+        background: #58a;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: skewX(45deg);
+    }
+    
+    .demo11-1 {
+        overflow: hidden;
+        width: 100px;
+        transform: rotate(45deg);
+    }
+    
+    .demo11-1>img {
+        max-width: 100%;
+        transform: rotate(-45deg) scale(1.42);
+    }
+    
+    .demo11-2 {
+        /*width: 100px;*/
+        /*overflow: hidden;*/
+        margin: 100px;
+        margin-top: 0px;
+    }
+    
+    .demo11-2>img {
+        width: 100px;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        transition: 1s clip-path;
+    }
+    
+    .demo11-2>img:hover {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    
+    .demo12-1 {
+        background: #58a;
+        position: relative;
+        width: 800px;
+    }
+    
+    .demo12-2 {
+        background: linear-gradient(45deg, transparent 15px, hsla(0, 0%, 100%, .3) 0);
+        padding: 10px;
+        width: 100px;
+        height: 150px;
+        position: absolute;
+        top: 30px;
+        left: 20px;
+
+    }
+    
+    .demo12-3 {
+        background: linear-gradient(45deg, transparent 15px, hsla(0, 0%, 100%, .3) 0) bottom left, linear-gradient(-45deg, transparent 15px, hsla(0, 0%, 100%, .3) 0) bottom right, linear-gradient(135deg, transparent 15px, hsla(0, 0%, 100%, .3) 0) top left, linear-gradient(-135deg, transparent 15px, hsla(0, 0%, 100%, .3) 0) top right;
+        background-size: 50% 50%;
+        background-repeat: no-repeat;
+        padding: 10px;
+        width: 100px;
+        height: 150px;
+        position: absolute;
+        top: 30px;
+        left: 150px;
+    }
+    
+    .demo12-4 {
+        border: 0px solid transparent;
+        background: radial-gradient(circle closest-side at center, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .2));
+        border-image: 1 url('data:image/svg+xml,\
+            <svg xmlns="http://www.w3.org/2000/svg" width="3" \
+            height="3" fill="hsla(0,0%,100%,.2)">\
+            <polygon points="0,1 1,0 2,0 3,1 3,2 2,3 1,3 0,2"/>\
+            </svg>');
+        background-clip: padding-box;
+        padding: 10px;
+        width: 100px;
+        height: 150px;
+        position: absolute;
+        top: 30px;
+        left: 350px;
+        transition: 0.5s border-width linear;
+        /*box-shadow: 2px 2px 10px rgba(0,0,0,.5);*/
+        filter: drop-shadow(2px 2px 10px rgba(0,0,0,.5));
+    }
+    
+    .demo12-4:hover {
+        border-width: 15px;
+    }
+    
+    .demo12-5 {
+        position: absolute;
+        left: 500px;
+        top: 30px;
+        width: 200px;
+        height: 200px;
+        background: url('./static/img/mi.jpeg');
+        clip-path: polygon(20px 0, 180px 0, 100% 20px, 100% 180px, 180px 100%, 20px 100%, 0 180px, 0 20px);
+        /*并不支持calc()啊*/
+        /*filter: drop-shadow(2px 2px 10px rgba(0,0,0,.5));*/
+
+    }
+    
+    .demo13-1 nav {
+        position: relative;
+        padding-left: 1em;
+        margin-bottom: -.1em;
+    }
+    
+    .demo13-1 a {
+        position: relative;
+        display: inline-block;
+        z-index: 1;
+        padding: .5em .8em .5em .5em;
+        margin: 0 -.2em;
+        /*border:;*/
+    }
+    
+    .demo13-1 a::before {
+        content: '';
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: #ccc linear-gradient(hsla(0, 0%, 100%, .6), hsla(0, 0%, 100%, 0));
+        transform: scale(1.1, 1.3) perspective(.5em) rotateX(5deg);
+        transform-origin: bottom left;
+    }
+    
+    .demo13-1 main,
+    .demo13-1 a::before {
+        border: .1em solid rgba(0, 0, 0, .4);
+        border-radius: .5em .5em 0 0;
+    }
+    
+    .demo13-1 main {
+        padding: 1em;
+        background: #eee;
+        border-radius: .15em;
+    }
+    
+    .demo13-1 a.selected::before {
+        border-bottom-color: #eee;
+        background: #ccc linear-gradient(white, #eee);
+    }
+    
+    .demo13-1 a.selected {
+        z-index: 2;
+    }
+    .demo13-1 main div{
+        display: none;
+    }
+    .demo13-1 main div.show{
+        display: block;
+    }
+    .demo14-1{
+        width: 200px;
+        height: 200px;
+        background:yellowgreen ;
+        border-radius: 50%;
+        background-image:linear-gradient(to right,transparent 50%,#655 0);
+
+    }
+    .demo14-1::before{
+        content: '';
+        display: block;
+        border-radius: 0 100% 100% 0/50%;
+        margin-left: 50%;
+        height: 100%;
+        background-color:inherit;
+        transform-origin: left;
+        animation:spin 3s infinite linear ,
+                bg 6s step-end infinite;
+        animation-play-state:inherit;
+    }
+    .demo14-1:hover{
+        animation-play-state: paused;
+        
+    }
+    @keyframes spin{
+        to{
+            transform: rotate(.5turn);
+        }
+    }
+    @keyframes bg{
+        50%{
+            background-color:#655;
+        }
+    }
+    .demo14-2 svg{
+        height: 100px;
+        width: 100px;
+        transform: rotate(-90deg);
+        background: yellowgreen;
+        border-radius: 50%;
+    }
+    .demo14-2 circle{
+        fill-opacity: 0;
+        stroke-width:32;
+    }
+    .demo14-2 .first-circle{
+        stroke: #655;
+        stroke-dasharray: 38 100;
+        stroke-dashoffset:-20;
+    }
+    .demo14-2 .second-circle{
+        stroke: #58a;
+        
+        stroke-dasharray: 20 100;
+        stroke-dashoffset:0;
+        
+
+    }
+    .pie{
+        position: relative;
+        display: inline-block;
+        width: 150px;
+        line-height: 150px;
+        text-align: center;
+    }
+    .pie svg{
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        transform: rotate(-90deg);
+        background: yellowgreen;
+        border-radius: 50%;
+    }
+    .pie circle{
+        stroke: #655;
+        fill:yellowgreen;
+        stroke-width:32;
+    }
+    .demo15-1{
+        width: 100px;
+        height: 100px;
+        background: gold;
+        box-shadow: 0 5px 4px -4px black;
+    }
+    .demo19-1{
+        width: 200px;
+        height: 100px;
+        background: #58a;
+        background:linear-gradient(-135deg,transparent 50%,rgba(0,0,0,.5) 0) 100% 0/2em 2em no-repeat 
+        ,linear-gradient(-135deg,white 50%,#58a 0 ) 100% 0/2em 2em no-repeat #58a;
+    }
+    .demo21-1 dd{
+        margin: 0;
+        font-weight: bold;
+    }
+    .demo21-1 dd,.demo21-1 dt{
+        display: inline;
+    }
+    .demo21-1 dd+dt::before{
+        content: "\A";
+        white-space: pre;
+    }
+    .demo21-1 dd+dd::before{
+        content: ",";
+        margin-left: -.25em;
+    }
+    .demo22-1{
+        padding:.5em;
+        background: beige;
+        background-origin: content-box;
+        line-height: 1.5;
+        background-image: linear-gradient(rgba(0,0,0,.2) 50%,transparent 0) ;
+        background-size: auto 3em;
+    }
+    .demo26-1 .underline{
+        /*text-decoration: underline;*/
+        /*border-bottom: 1px dotted red;*/
+        /*background: #ccc;*/
+        font: 250%/1.6 Baskerville, Palatino, serif;
+        background: linear-gradient(-45deg,transparent 40%,red 0,red 60%,transparent 0) 0 100%,
+        linear-gradient(45deg,transparent 40%,red 0,red 60%,transparent 0) .1em bottom;
+        
+        background-size: .2em .1em;
+        background-repeat: repeat-x;
+    }
+    .demo27-1{
+        width: 200px;
+        height: 100px;
+        background: #203;
+    }
+    .demo27-1 p{
+        text-align: center;
+        color: #ffc;
+        /*line-height: 100px;*/
+        font: 3em/100px monospace;
+        transition: 2s linear;
+    }
+    .demo27-1 p:hover{
+        /*color: transparent;*/
+        text-shadow: 0 0 .1em white, 0 0 .3em white;
+        /*filter: blur(.05em);*/
+
+    }
+    .demo31-1{
+        user-select:none;
+        /*outline: 1px solid blue;*/
+    }
+    .demo31-1 input{
+        position: absolute;
+        clip:rect(0,0,0,0);
+    }
+    .demo31-1 input:checked+label::before{
+        content: '\2713';
+        box-shadow: 1px 1px 1px black;
+    }
+    .demo31-1 input+label::before{
+        /*border: 1px solid blue;*/
+        content: '\a0';
+        display: inline-block;
+        width: .8em;
+        height: .8em;
+        margin-right: .2em;
+        background: silver;
+        border-radius: .2em;
+        line-height: .65em;
+
+    }
+    .demo31-1 input+label{
+        /*background: yellow;*/
+    }
+    .demo31-1 input:focus+label::before{
+        
+    }
+    .demo36-1 figure{
+        border: 1px solid silver;
+        padding:2em;
+        margin: auto;
+        /*max-width: 400px;*/
+        max-width: min-content;
+        word-wrap: break-word;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="css-demo">
+        <p>css编码技巧</p>
+        <div>
+            <button class="ok">确定</button>
+            <button class="cancel">取消</button>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>提示框的小三角</p>
+        <div>
+            <div class="tips">
+                <label for="">姓名:
+                    <input type="text" placeholder="请输入姓名">
+                </label>
+                <div class="callout">请输入正确的姓名</div>
+            </div>
+        </div>
+        <div>
+            <div class="tips">
+                <label for="">姓名:
+                    <input type="text" placeholder="请输入姓名">
+                </label>
+                <div class="callout">请输入正确的姓名</div>
+            </div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>1半透明边框</p>
+        <div>
+            <div class="transparent-border-demo">
+                <div>
+                    <p>新加坡的首都是哪里呢？</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>4边框内圆角</p>
+        <div>
+            <div class="demo4">
+                内容区
+            </div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>5条纹背景</p>
+        <div>
+            <div class="content-box demo5-1"></div>
+            <div class="content-box demo5-2"></div>
+            <div class="content-box demo5-3"></div>
+            <div class="content-box demo5-4"></div>
+            <div class="content-box demo5-5"></div>
+            <div class="content-box demo5-6"></div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>6复杂的背景图案</p>
+        <div>
+            <div class="content-box demo6-1"></div>
+            <div class="content-box demo6-2"></div>
+            <div class="content-box demo6-3"></div>
+            <div class="content-box demo6-4"></div>
+            <div class="content-box demo6-5"></div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>8连续的图像边框</p>
+        <div>
+            <div class="content-box demo8-1"></div>
+            <div class="content-box demo8-2"> 老旧信封</div>
+            <div class="content-box demo8-3"> 蚂蚁行军</div>
+            <div class="content-box demo8-4">
+                <div class="footer"></div> 噼里啪啦一大堆，上面哟孤儿脚注</div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>二-9椭圆</p>
+        <div>
+            <div class="content-box demo9-1"></div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>10平行四边形</p>
+        <div>
+            <div class="content-box demo10-1">
+                点击我
+            </div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>11菱形图片</p>
+        <div class="content-box ">
+            <div class="demo11-1"><img src="./static/img/mi.jpeg" alt=""></div>
+            <div class="demo11-2"><img src="./static/img/mi.jpeg" alt=""></div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>12切角效果</p>
+        <div class="content-box demo12-1">
+            <div class="demo12-2"> 内容写在这里</div>
+            <div class="demo12-3"> 四切脚</div>
+            <div class="demo12-4"> 四切脚</div>
+            <div class="demo12-5"> </div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>13梯形tab</p>
+        <div class="demo13-1 content-box ">
+            <nav>
+                <a href="">主页</a>
+                <a href="" class="selected">项目简介</a>
+                <a href="">联系我</a>
+            </nav>
+            <main>
+                <div class="">主页内容</div>
+                <div class="show">项目简介</div>
+                <div class="">联系我</div>
+                
+            </main>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>14简单的饼图</p>
+        <div class="content-box">
+            <div class="demo14-1">
+                
+            </div>
+        </div>
+        <div class="content-box">
+            <div class="demo14-2">
+                <svg viewBox="0 0 32 32">
+                    <circle class="first-circle" r="16" cx="16" cy="16"></circle>
+                    <circle class="second-circle" r="16" cx="16" cy="16"></circle>
+                </svg>
+            </div>
+            <div class="pie">20%</div>
+            <div class="pie">50%</div>
+        </div>
+    </div>  
+    <div class="css-demo">
+        <p>15单侧投影</p>
+        <div class="content-box">
+            <div class="demo15-1"></div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>19折角效果</p>
+        <div class="demo19-1 content-box">
+            
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>21插入换行</p>
+        <div class="content-box demo21-1">
+            <dl>
+                <dt>鲍旭</dt>
+                <dd>20岁</dd>
+                <dt>冯硕羽</dt>
+                <dd>18岁</dd>
+                <dd>很美</dd>
+                <dt>笔笔</dt>
+                <dd>2岁</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>22斑马条纹</p>
+        <div class="content-box">
+            <pre class="demo22-1">
+.demo21-1 dd{
+    margin: 0;
+    font-weight: bold;
+}
+.pie{
+        position: relative;
+        display: inline-block;
+        width: 150px;
+        line-height: 150px;
+        text-align: center;
+    }
+
+            </pre>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>26下划线</p>
+        <div class="demo26-1">
+            虎常单独活动，只有在繁殖季节雌雄才在一起生活。无固定巢穴，多在山林间游荡寻食。<span class="underline">能游泳，不会爬树。由于林区开发、人口激增，过去偏远地区都已发展为村</span>镇，虎亦常到林区居民点附近觅食。虎多黄昏活动
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>27文字发光</p>
+        <div>
+            <div class="demo27-1"><p>glow</p></div>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>31自定义复选框</p>
+        <div class="demo31-1">
+            <input type="checkbox" id="awesome">
+            <label for="awesome">awesome</label>
+        </div>
+    </div>
+    <div class="css-demo">
+        <p>36自适应内部元素</p>
+        <div class="demo36-1">
+            <figure>
+                <figcaption>标题</figcaption>
+                <img src="./static/img/mi.jpeg" alt="">
+                <p>fasdddddddddddddddddddddddddddddddfsadfasdfasdfasdfasdfasdfasdfasdf</p>
+            </figure>
+        </div>
+    </div>
+    <script type="text/javascript" src="./static/js/util.js"></script>
+    <script>
+    window.addEventListener("load", function(event) {
+
+
+        var demo13A = document.querySelectorAll(".demo13-1 a");
+        var nav = document.querySelector(".demo13-1 nav");
+        var mainDivs = document.querySelectorAll(".demo13-1 main div");
+        
+        nav.addEventListener("click", function(event) {
+            var event = event || window.event;
+            var target = event.target || window.srcElement;
+            
+            $.removeClass("selected",demo13A);
+            if (nav.contains(target)) {
+                event.preventDefault();
+                var index = $.getNodeIndex(target,demo13A);
+                $.removeClass("show",mainDivs);
+                mainDivs[index].classList.toggle("show");
+                target.classList.add("selected");
+                
+            }
+            
+        });
+
+        $$(".pie").forEach(function(pie){
+            var percent = parseFloat(pie.textContent);
+            var ns = "http://www.w3.org/2000/svg";
+            var svg = document.createElementNS(ns,"svg");
+            var circle = document.createElementNS(ns,"circle");
+            var title = document.createElementNS(ns,"title");
+            title.textContent = pie.textContent;
+            svg.setAttribute("viewBox","0 0 32 32");
+            circle.setAttribute("r",16);
+            circle.setAttribute("cx",16);
+            circle.setAttribute("cy",16);
+            circle.setAttribute("stroke-dasharray",percent+" 100");
+            // pie.textContent="";
+            svg.appendChild(title);
+            svg.appendChild(circle);
+            pie.appendChild(svg);
+        });
+
+    });
+    </script>
+</body>
+
+</html>

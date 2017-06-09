@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>三行自适应布局</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    header {
+        position: fixed;
+        height: 100px;
+        top: 0;
+        width: 100%;
+        background-color: pink;
+    }
+    
+    article {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        right: 0;
+        bottom: 100px;
+        /*background-color: gray;*/
+        color: black;
+        border: 1px dotted black;
+    }
+    
+    footer {
+        position: fixed;
+        height: 100px;
+        bottom: 0;
+        width: 100%;
+        background-color: pink;
+    }
+    .forfloat{
+        border: 1px dotted #fd0000;
+        margin: 5px;
+    }
+    .forfloat>div{
+        height: 60px;
+        width: 50px;
+        background-color: pink;
+        float: left;
+        margin: 5px;
+    }
+    section{
+        float: left;
+        width: 80%;
+        height: 100%;
+        background-color: #ccc;
+        /*opacity: 0.5;*/
+    }
+    aside{
+        float: left;
+        width: 20%;
+        height: 100%;
+        background-color: #fb0000;
+        /*opacity: 0.5;*/
+    }
+    .clearfix:after{
+        content:".";
+        display: block;
+        clear: both;
+        overflow: hidden;
+        visibility: hidden;
+        height: 0;
+    }
+
+
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <article class="clearfix">
+        <section>asdf
+            <a href="#" >a</a>
+        </section>
+        <aside >
+            right
+        </aside>
+
+    
+    </article>
+    <footer></footer>
+</body>
+
+</html>

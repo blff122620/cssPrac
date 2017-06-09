@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>两列自适应布局4</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+        .parent{
+            display: table;
+            width: 100%;
+            table-layout: fixed;/*布局优先，加速渲染,与内容无关*/
+        }
+        .l{
+            width: 200px;
+            /*width: 0.1%;*/
+            background: #ccc;
+            border: 1px dotted green;
+            padding-right: 20px;
+            /*overflow: hidden;*/
+            /*min-width: 100px;*/
+            /*resize: horizontal;*/
+            background-clip: content-box;
+            /*background-origin: border-box;*/
+        }
+        .content,.l{
+
+            display: table-cell;
+        }
+        .content{
+            background: lightgreen;
+            border: 1px dashed blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="l left"><p>123dddddddsddsfasdfadsfasdfasdfasd</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p></div>
+        <div class="content ">
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+            <p>123</p>
+        </div>
+    </div>
+</body>
+
+</html>
