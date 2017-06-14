@@ -41,7 +41,38 @@
     </div>
     <script type="text/javascript" src="./static/js/util.js"></script>
     <script>
-
+        function fn(n){
+            var result = [],
+                i = 1,
+                origin = [],
+                start = 2,
+                end = 32,
+                randomN = 0;
+            for(;i<end;i++){
+                origin.push(i);
+            }
+            i = 0;
+            if(typeof n !== "number"){
+                return [];
+            }
+            if(n <= 0){
+                return [];
+            }
+            if(n > end-1){
+                return origin;
+            }
+            while(i<n){
+                
+                randomN = parseInt(Math.random() * (end-1) % (end-1) + start);
+                if(randomN in result){
+                    continue;
+                }
+                result.push(randomN);
+                i++;
+            }
+            
+            return result;
+        }
     </script>  
 </body>
 </html>
