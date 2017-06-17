@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    ...
+    <link href="static/css/prism.css" rel="stylesheet" />
+</head>
+<body>
+    <pre class="line-numbers" data-start="0"><code class="language-markup" >
+"
+&lt;!DOCTYPE html&gt;
+&lt;html lang="zh"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;圣杯布局&lt;/title&gt;
+    &lt;link rel="stylesheet" href="./static/css/reset.css"&gt;
+    &lt;link rel="stylesheet" href="./static/css/global.css"&gt;
+    &lt;style&gt;
+        .cup{
+            padding:0 100px 0 100px;
+            overflow: hidden;
+        }
+        .cup&gt;div{
+            float: left;
+            height: 100px;
+        }
+        .middle{
+            width: 100%;
+        }
+        .left,.right{
+
+            width: 100px;
+        }
+        .left{
+            margin-left:-100%;
+            position: relative;
+            left:-100px;
+        }
+        .right{
+            margin-left: -100px;
+            position:relative;
+            right: -100px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="cup"&gt;
+        &lt;div class="middle bg1"&gt;middle&lt;/div&gt;
+        &lt;div class="left bg2"&gt;left&lt;/div&gt;
+
+        &lt;div class="right bg3"&gt;right&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script type="text/javascript" src="./static/js/util.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+
+    &lt;/script&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+"
+    </code></pre>
+    <script src="static/js/prism.js"></script>
+</body>
+</html>
