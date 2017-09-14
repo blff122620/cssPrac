@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>柱状图快速排序</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+        *{
+          transition: all 1s;
+        }
+        body{
+            margin: 20px 0 0 20px;
+        }
+        .bar{
+            display: flex;
+            position: relative;
+            justify-content: space-around;
+            align-items: flex-end;
+            width: 800px;
+            height: 600px;
+            border:2px solid black;
+            border-top-width: 0;
+            border-right-width: 0;
+        }
+        .bar .column{
+            width: 30px;
+            /*height: 100px;*/
+        }
+        .bar .corner{
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid black;
+        }
+        .bar .nw-corner{
+            top: 0;
+            left: 0;
+            transform: translate(-1px,-1px) rotate(45deg);
+            transform-origin: top left;
+            border-bottom-width: 0;
+            border-right-width: 0;
+        }
+        .bar .se-corner{
+            bottom: 0;
+            right: 0;
+            transform: translate(1px,1px) rotate(-45deg) ;
+            transform-origin: right bottom;
+            border-top-width: 0;
+            border-left-width: 0;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="bar" id="j-bar">
+        <div class="nw-corner corner"></div>
+        <div class="se-corner corner"></div>
+        
+    </div>
+    <script type="text/javascript" src="./static/js/util.js"></script>
+    <script>
+(function($){
+  Array.prototype.qSort = Array.prototype.qSort || function(slot,cols){
+    let pivot,
+      idx = 0,
+      left = [],
+      right = [];
+    if(this.length <= 1){
+      return this;
+    }
+    pivot = this[0];
+    this.forEach(function(item,index){
+      if(index === 0){
+        return ;
+      }
+      if(item > pivot){
+        right.push(item);
+      }
+      else{
+        left.push(item);
+      }
+    });
+    setTimeout(function(){
+      cols[0].style.transform = `translateX(${parseInt(slot)}px)`;
+    },1000);
+    // slot += slot;
+    return this.qSort.call(left,slot,cols).concat(pivot,this.qSort.call(right,slot,cols));
+  };
+  let arr = [3,7,3,2,25,8,1,20,13],
+    jBar = $$('#j-bar'),
+    col,
+    cols,
+    slot,
+    count = arr.length,
+    frag = document.createDocumentFragment(),
+    jBarW = parseInt(window.getComputedStyle(jBar).width),
+    colW;
+  arr.forEach((data,index) => {
+    col = document.createElement('div');
+    col.classList.add('column');
+    col.classList.add('bg1');
+    col.style.height = `${parseInt(data)*20}px`;
+    col.innerText = data;
+    col.id = `j-col${index}`; 
+    frag.appendChild(col);
+  });
+  jBar.appendChild(frag);
+  cols = $$('.column',jBar);
+  colW = parseInt(window.getComputedStyle(cols[0]).width);
+  slot = ((jBarW) / count - colW) ; // 槽长度 
+  arr.qSort(slot,cols);
+})($);
+    </script>  
+</body>
+</html>

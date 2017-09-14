@@ -1,0 +1,5 @@
+#bin/bash
+#sass --watch style.scss:style.css --style compact
+#sass --watch style.scss:style.css --sourcemap
+sass --watch src:dist --style expanded 
+#sass --watch style.scss:style.css --debug-info

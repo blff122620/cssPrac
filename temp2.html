@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>title_here</title>
+  <link rel="stylesheet" href="./static/css/reset.css">
+  <link rel="stylesheet" href="./static/css/global.css">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <form action="" name="my" id="j-my">
+    <ul>
+      <li>
+        <input type="radio" name="hi" value="aaa">a</li>
+      <li>
+        <input type="radio" name="hi" value="aaa">a</li>
+      <li>
+        <input type="radio" name="hi" value="aaa">a</li>
+    </ul>
+    <label for="">
+      <datalist id="fruits">
+        <option value="a">a</option>
+        <option value="body">b</option>
+        <option value="css">c</option>
+      </datalist>
+      If other, please specify:
+      <input type="text" list="fruits">
+    </label>
+    <label for="">time
+      <input type="time">
+    </label>
+    <label>Upload files:
+      <input type="file" multiple name="upload">
+    </label>
+    <input type="search" value="[Any search text]">
+    <br>
+    <select name="" id="" multiple="">
+      <option value="">12222</option>
+      <option value="">22222</option>
+      <option value="">3222</option>
+    </select>
+  </form>
+  <script type="text/javascript" src="./static/js/util.js"></script>
+  <script>
+
+
+
+const temp = {
+  name: 'baoxu',
+};
+
+class Temp2 {
+  constructor(){
+    this.name = 'baoxu';
+  }
+
+  get prop(){
+    return this.name;
+  }
+
+  set prop(val){
+    this.name = val;
+  }
+}
+
+Object.defineProperty(temp, 'prop', {
+  // configurable: true,
+  enumerable: true,
+  get(){
+    return this.name;
+  },
+  set(name){
+    this.name = name;
+  }
+});
+
+const s = new Set();
+
+const arr = [2,3,5,4,5,2,2];
+
+arr.map(item => s.add(item));
+
+for(let item of s){console.log(item)}
+
+add(3)(4);
+
+function add(num){
+  let result = 0;
+  result += num;
+  const helper = (val) => {
+    result += val;
+    return helper;
+  };
+  helper.valueOf = () => result;
+  return helper;
+}
+
+
+function Observer(){
+  this.box = {};
+}
+
+Observer.prototype = {
+  subscribe(event, fn) {
+    if(typeof fn !== 'function'){
+      throw new TypeError('第二个参数必须是函数');
+    }
+    let list = this.box[event];
+    !Array.isArray(list)? list = []: '';
+
+    list.includes(fn)? '': list.push(fn);
+    this.box[event] = list;
+  },
+  unload(event, fn) {
+    const list = this.box[event]? this.box[event]: [];
+    const idx = list.indexOf(fn);
+    return idx === -1? false: list.splice(idx, 1);
+  },
+  dispatch({event, ctx = {}, args = []}) {
+    if(!Array.isArray(args)){
+      throw new TypeError('args参数必须是数组');
+    }
+    const list = this.box[event]? this.box[event]: [];
+    if(list){
+      list.forEach(fn => {
+        fn.apply(ctx, args);
+      });
+    }
+  }
+}
+Observer.prototype.constructor = Observer;
+
+const observer = new Observer();
+
+function a(){
+  console.log('a');
+}
+function b(){
+  console.log('b');
+}
+function c(){
+  console.log('c');
+}
+
+observer.subscribe('event1', a);
+
+observer.subscribe('event1', b);
+
+observer.subscribe('event2', c);
+
+setTimeout(() => {
+  observer.dispatch({event:'event2'})
+},1000)
+
+setTimeout(() => {
+  observer.dispatch({event:'event1'})
+},2000)
+
+observer.unload('event1', 'sdf');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

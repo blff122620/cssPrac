@@ -31,14 +31,34 @@
         .body{
             padding:0 100px;
         }
+        .site {
+    width:auto;
+    height:auto;
+    background-color:#fff;
+    position:relative;
+}
+.site b {
+    border-color: #666 #fff #fff;
+    border-style: solid;
+    border-width: 20px;
+    width: 30px;
+    height: 30px;
+    position:absolute;
+    top:7px;
+}
     </style>
 </head>
 <body>
+<img id="temp" src="/static/img/timg.jpeg" alt="">
+<img src="">
+
+<div class="site"> 这就是下拉的小三角形 <b> </b> </div>
     <div class="body">
     <div class="main bg1">main</div>
     <div class="left bg2">left</div>
     <div class="right bg3">right</div>
     </div>
+    <img src="" alt="">   
     <script type="text/javascript" src="./static/js/util.js"></script>
     <script>
         function fn(n){
@@ -73,6 +93,27 @@
             
             return result;
         }
+
+        var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d'),
+            img = $$('#temp');
+        canvas.style.outline = '2px dotted red';
+        canvas.style.marginLeft = '400px';
+        img.onload = function(){
+            canvas.width = drawWidth = img.naturalWidth;
+            canvas.height = drawHeight = img.naturalHeight;
+            
+            canvas.width = drawHeight;
+            canvas.height = drawWidth;
+            cx = canvas.width/2;
+            cy = canvas.height/2;
+            ctx.translate(cx,cy);
+            ctx.rotate(90*Math.PI/180);
+            ctx.translate(-cy,-cx);
+            ctx.drawImage(img,0,0,canvas.height,canvas.width);
+            document.body.appendChild(canvas);
+        };
+        
     </script>  
 </body>
 </html>
