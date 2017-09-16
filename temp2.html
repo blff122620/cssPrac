@@ -105,14 +105,17 @@ function Observer(){
 }
 
 Observer.prototype = {
-  subscribe(event, fn) {
+  subscribe(event, fn, unshift = false) {
     if(typeof fn !== 'function'){
       throw new TypeError('第二个参数必须是函数');
     }
     let list = this.box[event];
     !Array.isArray(list)? list = []: '';
 
-    list.includes(fn)? '': list.push(fn);
+    if(!list.includes(fn)){
+      unshift? list.unshift(fn): list.push(fn);
+    }
+
     this.box[event] = list;
   },
   unload(event, fn) {
@@ -130,6 +133,19 @@ Observer.prototype = {
         fn.apply(ctx, args);
       });
     }
+  },
+  dispatchAll({event, ctx = {}, args}){
+    const list = this.box[event]? this.box[event]: [];
+    let index = 0;
+    while(list.length > 0){
+      list.shift().call(ctx, args[index]);
+      index += 1;
+    }
+  },
+  pop({event, ctx = {}, args}){
+    const list = this.box[event]? this.box[event]: [];
+
+    list.length > 0? list.shift().apply(ctx, args): '';
   }
 }
 Observer.prototype.constructor = Observer;
@@ -154,28 +170,220 @@ observer.subscribe('event2', c);
 
 setTimeout(() => {
   observer.dispatch({event:'event2'})
-},1000)
+},0)
 
 setTimeout(() => {
   observer.dispatch({event:'event1'})
-},2000)
+},0)
 
 observer.unload('event1', 'sdf');
 
 
 
 
+const Lazyman = (() => {
+  class _Lazyman{
+    constructor(event){
+      this.props = [];
+    }
+    eat(food){
+      observer.subscribe('lazyman', run.bind(this)('eat'));
+      this.props.push(food);
+      return this;
+    }
+    hi(name){
+      observer.subscribe('lazyman', run.bind(this)('hi'));
+      this.props.push(name);
+      return this;
+    }
+    sleep(time){
+      observer.subscribe('lazyman', run.bind(this)('sleep'));
+      this.props.push(time);
+      return this;
+    }
+    sleepFirst(time){
+      observer.subscribe('lazyman', run.bind(this)('sleepFirst'), true);
+      this.props.unshift(time);
+      return this;
+    }
+  }
+  function run(args){
+    const self = this;
+    switch (args) {
+      case 'eat':
+        return (food) => {
+          log(`eat ${food}`);
+          observer.pop({
+            event: 'lazyman',
+            args: [self.props.shift()]
+          });
+        };
+        break;
+      case 'sleep':
+        return (time) =>
+          setTimeout(() => {
+            log(`sleep ${time}s`);
+            observer.pop({
+              event: 'lazyman',
+              args: [self.props.shift()]
+            });
+          }, time * 1000);
+        break;
+      case 'sleepFirst':
+        return (time) =>
+          setTimeout(() => {
+            log(`sleepFirst ${time}s`);
+            observer.pop({
+              event: 'lazyman',
+              args: [self.props.shift()]
+            });
+          }, time * 1000);
+        break;
+      case 'hi':
+        return (name) => {
+          log(`hi ${name}`);
+          observer.pop({
+            event: 'lazyman',
+            args: [self.props.shift()]
+          });
+        };
+        break;
+      default:
+
+    }
+  }
+  function log(val){
+    console.log(val);
+  }
+  return (name) => {
+    const lazyman = new _Lazyman();
+    lazyman.hi(name);
+    setTimeout(() => {
+      observer.pop({
+        event: 'lazyman',
+        args: [lazyman.props.shift()],
+      });
+    },0);
+    return lazyman;
+  };
+})();
 
 
 
+const LL = (() => {
+  class _Lazyman{
+    constructor(){
+      this.tasklist = [];
+    }
+    next(){
+      const p = this.tasklist.shift();
+      p && p().then(() => this.next());
+    }
+    eat(food){
+      this.tasklist.push(() => new Promise(r => log(`Eat ${food}`)));
+      return this;
+    }
+    sleep(time){
+      this.tasklist.push(() => new Promise(r => setTimeout(() => log(`Sleep ${time}s`), time * 1000)));
+      return this;
+    }
+    sleepFirst(time){
+      this.tasklist.unshift(() => new Promise(r => setTimeout(() => log(`Sleep ${time}s`), time * 1000)));
+      return this;
+    }
+  }
+  function log(str){
+    console.log(str);
+  }
 
+  return () => {
+    const lazyman = new _Lazyman();
+    Promise.resolve().then(() => lazyman.next());
+    return lazyman;
+  };
+})();
 
+function makeI(arr){
+  let index = 0;
+  return {
+    next: () => index < arr.length?
+      {
+        value: arr[index++],
+        done: false,
+      }:
+      {
+        value: undefined,
+        done: true,
+      }
+  };
+}
 
+const arra = [1,3,4,5,6];
+const it = makeI(arra);
+for(const num of arra){
+  console.log(num)
+}
+const str = '𠮷bao旭';
+for(const code of str){
+  console.log(code.codePointAt(0));
+}
 
+function* f(){
+  console.log('go');
+}
 
+const ff = f();
 
+var g = function* () {
+  try {
+    yield 3;
+  } catch (e) {
+    console.log('内部捕获', e);
+  }
+};
 
+var i = g();
+i.next();
 
+try {
+  i.throw('a');
+  i.throw('b');
+} catch (e) {
+  console.log('外部捕获', e);
+}
+
+const clock = function* (){
+  while(true){
+
+    yield Promise.resolve(()=>console.log('Tick'));
+
+    yield Promise.resolve(()=>console.log('Tock'));
+  }
+}
+const gC = clock();
+let idx = 0;
+function test(){
+  if(idx < 50){
+    gC.next().value.then(f => f());
+    idx += 1;
+    setTimeout(test, 1000);
+  }
+}
+w = new Promise(r => {
+  idx += 1;
+  r(idx);
+})
+
+w.then(r => console.log(r));
+w.then(r => console.log(r));
+
+const fff = () => setTimeout(() => console.log('now'), 0);
+(
+  () => new Promise(
+    resolve => resolve(fff())
+  )
+)().then(() => console.log('cao'));
+console.log('next');
 
   </script>
 </body>

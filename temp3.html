@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+(() => {
+
+  function red(){
+    console.log('red');
+  }
+  function green(){
+    console.log('green');
+  }
+  function yellow(){
+    console.log('yellow');
+  }
+  // 总控Promise
+  const p = Promise.resolve();
+
+  function getP(time, cl){
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(cl());
+      }, time * 1000);
+    });
+  }
+  const redP = getP.bind({}, 3, red);
+  const greenP = () => new Promise(resolve => {
+    setTimeout(() => {
+      resolve(green());
+    }, 1000);
+  });
+  const yellowP = () => new Promise(resolve => {
+    setTimeout(() => {
+      resolve(yellow());
+    }, 2000);
+  });
+  const step = (pro) => {
+    pro.then(() => redP())
+    .then(() => greenP())
+    .then(() => yellowP())
+    .then(() => step(pro));
+  }
+  // step(p);
+
+  function* gen(){
+    yield getP(3, red);
+    yield getP(1, green);
+    yield getP(2, yellow);
+  }
+
+  const it = gen();
+  const step2 = (gen, it) => {
+    const next = it.next();
+    if(next.done){
+      step2(gen, gen());
+    }
+    else{
+      next.value.then(() => step2(gen, it));
+    }
+  }
+  // step2(gen, it);
+  async function ge(){
+    await getP(3, red);
+    await getP(1, green);
+    await getP(2, yellow);
+    ge();
+  }
+
+  const sleep = (time) => new Promise(resolve => {
+    setTimeout(resolve, time * 1000);
+  });
+  var output = function (i) {
+      console.log(new Date, i);
+  };
+  (async () => {
+    for (var i = 0; i < 5; i++) {
+
+        output(i);  // 这里传过去的 i 值被复制了
+        await sleep(1);
+    }
+    await sleep(1);
+    console.log(new Date, i);
+  })();
+
+  async function f() {
+    return await 3;
+  }
+
+  f().then(v => console.log(v));
+  console.log('hi');
+
+})();
+
+</script>
+</body>
+</html>
