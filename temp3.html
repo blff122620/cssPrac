@@ -9,95 +9,99 @@
 <body>
 <script>
 
-(() => {
 
-  function red(){
-    console.log('red');
-  }
-  function green(){
-    console.log('green');
-  }
-  function yellow(){
-    console.log('yellow');
-  }
-  // 总控Promise
-  const p = Promise.resolve();
-
-  function getP(time, cl){
-    return new Promise(resolve => {
+const Lazyman = (() => {
+  class Lazyman{
+    constructor(name){
+      // 一个空的贯穿全局的Promise
+      this.queue = [];
+      this.queue.push(this.makeP(`Hi, my name is ${name}`));
       setTimeout(() => {
-        resolve(cl());
-      }, time * 1000);
-    });
-  }
-  const redP = getP.bind({}, 3, red);
-  const greenP = () => new Promise(resolve => {
-    setTimeout(() => {
-      resolve(green());
-    }, 1000);
-  });
-  const yellowP = () => new Promise(resolve => {
-    setTimeout(() => {
-      resolve(yellow());
-    }, 2000);
-  });
-  const step = (pro) => {
-    pro.then(() => redP())
-    .then(() => greenP())
-    .then(() => yellowP())
-    .then(() => step(pro));
-  }
-  // step(p);
-
-  function* gen(){
-    yield getP(3, red);
-    yield getP(1, green);
-    yield getP(2, yellow);
-  }
-
-  const it = gen();
-  const step2 = (gen, it) => {
-    const next = it.next();
-    if(next.done){
-      step2(gen, gen());
+        this.next();
+      }, 0);
     }
-    else{
-      next.value.then(() => step2(gen, it));
+    next(){
+      const p = this.queue.shift();
+      p && p().then(() => this.next());
+    }
+    // 这是一个Promise 里面包裹一个异步操作，在下一轮循环开始再加入队列，执行then的回调函数
+    makeP(content, {time = 0} = {}){
+      return () => new Promise(resolve => {
+        setTimeout(() => {
+          this.log(content);
+          resolve();
+        }, time * 1000);
+      });
+    }
+    eat(food){
+      this.queue.push(this.makeP(`Eat ${food}`));
+      return this;
+    }
+    sleep(time){
+      this.queue.push(this.makeP(`wakeup after ${time}s`, { time }));
+      return this;
+    }
+    sleepFirst(time){
+      this.queue.unshift(this.makeP(`FisrtSleep, wakeup after ${time}s`, { time }));
+      return this;
+    }
+    log(content){
+      console.log(content);
     }
   }
-  // step2(gen, it);
-  async function ge(){
-    await getP(3, red);
-    await getP(1, green);
-    await getP(2, yellow);
-    ge();
-  }
 
-  const sleep = (time) => new Promise(resolve => {
-    setTimeout(resolve, time * 1000);
-  });
-  var output = function (i) {
-      console.log(new Date, i);
+  return (name) => {
+    return new Lazyman(name);
   };
-  (async () => {
-    for (var i = 0; i < 5; i++) {
-
-        output(i);  // 这里传过去的 i 值被复制了
-        await sleep(1);
-    }
-    await sleep(1);
-    console.log(new Date, i);
-  })();
-
-  async function f() {
-    return await 3;
-  }
-
-  f().then(v => console.log(v));
-  console.log('hi');
-
 })();
 
+
+// Lazyman('鲍旭').sleep(3).eat('鱼香肉丝').eat('锅包肉').sleepFirst(2);
+console.log('我是第一个循环里的输出');
+
+const L = (() => {
+  class Lazyman{
+    constructor(name){
+      this.queue = [];
+      this.queue.push(this.makeP(`Hi, my name is ${name}`));
+      setTimeout(this.seq.bind(this), 0);
+    }
+    // 这是一个Promise 里面包裹一个异步操作，在下一轮循环开始再加入队列，执行then的回调函数
+    makeP(content, {time = 0} = {}){
+      return () => new Promise(resolve => {
+        setTimeout(() => {
+          this.log(content);
+          resolve();
+        }, time * 1000);
+      });
+    }
+    eat(food){
+      this.queue.push(this.makeP(`大吉大利，今晚吃“${food}”`));
+      return this;
+    }
+    sleep(time){
+      this.queue.push(this.makeP(`wakeup after ${time}s`, { time }));
+      return this;
+    }
+    sleepFirst(time){
+      this.queue.unshift(this.makeP(`FisrtSleep, wakeup after ${time}s`, { time }));
+      return this;
+    }
+    log(content){
+      console.log(content);
+    }
+    async seq() {
+      while(this.queue.length > 0){
+        await this.queue.shift()();
+      }
+    }
+  }
+
+  return (name) => new Lazyman(name);
+
+})(name);
+
+L('大逃杀玩家').sleep(3).eat('鸡').eat('锅包肉').sleepFirst(2);
 </script>
 </body>
 </html>
