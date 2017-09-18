@@ -5,8 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+  .light{
+    display: inline-block;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+  }
+  .red{
+    background: red;
+  }
+  .yellow{
+    background: yellow;
+  }
+  .green{
+    background: green;
+  }
+  .vh{
+    visibility: hidden;
+  }
+  </style>
 </head>
 <body>
+
+  <div class="light vh green"></div>
+  <div class="light vh yellow"></div>
+  <div class="light vh red"></div>
 <script>
 
 
@@ -101,7 +126,46 @@ const L = (() => {
 
 })(name);
 
-L('大逃杀玩家').sleep(3).eat('鸡').eat('锅包肉').sleepFirst(2);
+// L('大逃杀玩家').sleep(3).eat('鸡').eat('锅包肉').sleepFirst(2);
+
+function makeP(next, { time = 0, args = {} } = {}){
+  return new Promise(resolve => {
+    next(args);
+    setTimeout(() => {
+
+      resolve();
+    }, time * 1000);
+  });
+}
+function toggle(props){
+  const all = [...document.querySelectorAll('div')];
+  const [green, yellow, red] = [...document.querySelectorAll('div')];
+  all.forEach(light => {
+    light.classList.add('vh');
+  });
+  switch (props.color) {
+    case 'red':
+      red.classList.remove('vh');
+      break;
+    case 'yellow':
+      yellow.classList.remove('vh');
+      break;
+    case 'green':
+      green.classList.remove('vh');
+      break;
+    default:
+
+  }
+}
+
+const loop = async () => {
+
+    await makeP(toggle, { time: 3, args: { color: 'green'} });
+    await makeP(toggle, { time: 1, args: { color: 'yellow'} });
+    await makeP(toggle, { time: 2, args: { color: 'red'} });
+    loop();
+};
+loop();
 </script>
 </body>
 </html>
