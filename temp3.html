@@ -32,6 +32,7 @@
   <div class="light vh green"></div>
   <div class="light vh yellow"></div>
   <div class="light vh red"></div>
+  [导读]这道js的面试题，是这样的，页面上有一个按钮，一个ul，点击按钮的时候，每隔1秒钟向ul的后面追加一个li, 一共追加10个，li的内容从0开始技术 0, 1, 2, ....9 ，首先我们用闭包封装一个创建li元素的函数.
 <script>
 
 
@@ -159,11 +160,11 @@ function toggle(props){
 }
 
 const loop = async () => {
-
+  while(true){
     await makeP(toggle, { time: 3, args: { color: 'green'} });
     await makeP(toggle, { time: 1, args: { color: 'yellow'} });
     await makeP(toggle, { time: 2, args: { color: 'red'} });
-    loop();
+  }
 };
 loop();
 </script>
