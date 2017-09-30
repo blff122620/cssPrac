@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+
+(() => {
+
+  /**
+   * Definition for singly-linked list.
+
+   */
+  function ListNode(val) {
+     this.val = val;
+     this.next = null;
+  }
+  /**
+   * init ListNode
+   * @param {ListNode} head
+   * @param {number} k
+   * @return {ListNode}
+   */
+  function init(arr){
+    const head = new ListNode(undefined);
+    const output = [];
+    for(const val of arr){
+      output.push(new ListNode(val));
+    }
+    output.reduce((prev, next, index, arr) => {
+      prev.next = next;
+      return arr[index];
+    });
+    head.next = output.length? output[0]: null
+    return head;
+  }
+  const temp = init([1,2,3,4,5,6]);
+  var swapNodes = function(head, k) {
+    if(head && head.next){
+      const output = [];
+      let frontNode = head.next;
+      while(frontNode){
+        output.push(frontNode);
+        frontNode = frontNode.next;
+      }
+      if(k > 0 && k < output.length){
+        output.splice(k, 0, output[output.length - k ]);
+        const insert = output[k - 1];
+        output.splice(k - 1, 1);
+        output.splice(output.length - k, 1, insert);
+      }
+      console.log(init(output.map(node => node.val)));
+      return init(output.map(node => node.val));
+
+    }else{
+      throw new Error('wrong Input');
+    }
+  };
+  swapNodes(temp,4);
+
+})();
+
+
+
+
+
+  </script>
+</body>
+</html>
