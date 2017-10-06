@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全屏布局</title>
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/global.css">
+    <style>
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        .top,.foot{
+            /*height: 100px;*/
+        }
+        .foot{
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .content{
+            height: 100%;
+            overflow: scroll;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top bg1">dsafasd</div>
+
+    <div class="content bg3"></div>
+    <div class="foot bg4">dafads</div>
+    <script>
+    function test(arr){
+      const output = [];
+      const xhr = new XMLHttpRequest();
+      let cantShow = false;
+      arr.forEach((url, index) => {
+        ((idx) => {
+          xhr.open(arr[idx]);
+          xhr.readstateChange(function(response){
+            if(response.readystate === 4){
+              output[idx] = response.responseText;
+              let poped = output.shift();
+              idx -= 1;
+              do{
+                if(poped){
+                  输出poped
+                }else{
+                  output.splice(0,0,poped);
+                  idx += 1;
+                }
+              }while(poped);
+
+            }
+          });
+          xhr.send(null);
+        })(index);
+      });
+
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="static/css/全屏布局absolute.css"> -->
+  <link rel="stylesheet" href="static/css/全屏布局flex.css">
+</head>
+<body>
+    <div class="layout layout__top">top</div>
+    <div class="layout layout__body">
+      <div>hi</div>
+      <div>123</div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div>123</div>
+    </div>
+
+    <div class="layout layout__bottom">bottom</div>
+
+  <script>
+
+  function debounce(fn, timeout = 1000){
+    let timer = null;
+    return function(...args){
+      clearTimeout(timer);
+      const ctx = this;
+      timer = setTimeout(fn.bind(ctx, ...args), timeout);
+    };
+  }
+  function throttle(fn, timeout = 1000){
+    let timer = null,
+      prev = undefined;
+    return function(...args){
+      const ctx = this;
+
+      const now = new Date();
+
+      const dur = now - prev;
+
+      if(!prev){
+        prev = now;
+      }
+      if(dur < timeout){
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          prev = new Date();
+          fn.apply(ctx, args);
+        }, timeout - dur);
+      }
+      else{
+        prev = now;
+        fn.apply(ctx, args);
+      }
+
+    }
+  }
+  function move(e){
+    console.log(`当前时间:${(new Date()).getSeconds()}:${e}`);
+  }
+  // const newMove = debounce(move);
+  const tMove = throttle(move);
+  window.onmousemove = function(e){
+    tMove(e);
+  }
+  </script>
+</body>
+</html>

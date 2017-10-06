@@ -1,0 +1,30 @@
+$height: 50px;
+
+html, body{
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+}
+.layout{
+  position: absolute;
+  left: 0; right: 0;
+  &__body{
+    overflow: scroll;
+    top: $height;
+    bottom: $height;
+    background: pink;
+    &::-webkit-scrollbar{
+      display: none;
+    }
+  }
+  &__top{
+    top: 0;
+    height: $height;
+    background: blue;
+  }
+  &__bottom{
+    bottom: 0;
+    height: $height;
+    background: yellow;
+  }
+}

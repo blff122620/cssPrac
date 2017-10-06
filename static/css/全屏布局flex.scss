@@ -1,0 +1,26 @@
+$height: 50px;
+html, body{
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 100%;
+}
+.layout{
+  &__body{
+    flex: 1;
+    overflow: scroll;
+    background: pink;
+    &::-webkit-scrollbar{
+      display: none;
+    }
+  }
+  &__top{
+    height: $height;
+    background: blue;
+  }
+  &__bottom{
+
+    height: $height;
+    background: yellow;
+  }
+}

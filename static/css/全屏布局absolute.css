@@ -1,0 +1,26 @@
+html, body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0; }
+
+.layout {
+  position: absolute;
+  left: 0;
+  right: 0; }
+  .layout__body {
+    overflow: scroll;
+    top: 50px;
+    bottom: 50px;
+    background: pink; }
+    .layout__body::-webkit-scrollbar {
+      display: none; }
+  .layout__top {
+    top: 0;
+    height: 50px;
+    background: blue; }
+  .layout__bottom {
+    bottom: 0;
+    height: 50px;
+    background: yellow; }
+
+/*# sourceMappingURL=%E5%85%A8%E5%B1%8F%E5%B8%83%E5%B1%80absolute.css.map */
