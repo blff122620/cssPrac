@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="layout layout__top">top</div>
-    <div class="layout layout__body">
+    <div class="layout layout__body" id="jbody">
       <div>hi</div>
       <div>123</div>
       <div id="jt">some</div>
@@ -114,6 +114,9 @@
   window.onmousemove = function(e){
     tMove(e);
   }
+  window.onload = function(e){
+    jtt = document.getElementById('jt');
+  }
   window.onmousedown = function(e){
     // const jt = document.querySelector('#jt');
     // const fragment = document.createDocumentFragment();
@@ -122,12 +125,16 @@
     // fragment.appendChild(div);
     // jt.appendChild(fragment);
     const js = document.createElement('script');
-    js.innerText = `const jtt = document.getElementById('jt');
+    js.innerText = `
       jtt.innerText = '我来了';
       jtt.style.background = 'yellow';
+      var div = document.createElement('div');
+      div.innerText = 'hi';
+      document.querySelector('#jbody').insertBefore(div, jtt.nextSibling)
     `;
     document.body.appendChild(js);
   }
+
   </script>
 </body>
 </html>
